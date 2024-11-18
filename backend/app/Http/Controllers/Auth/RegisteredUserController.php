@@ -10,6 +10,8 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Spatie\Permission\Models\Role; 
+use Illuminate\Http\JsonResponse;
 
 class RegisteredUserController extends Controller
 {
@@ -18,24 +20,29 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request): Response
-    {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
+    public function store(Request $request): JsonResponse
+{
+    // Walidacja danych wejściowych
+    $validated = $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|string|email|max:255|unique:users',
+        'password' => 'required|string|min:8|confirmed',
+    ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+    // Tworzenie użytkownika
+    $user = User::create([
+        'name' => $validated['name'],
+        'email' => $validated['email'],
+        'password' => bcrypt($validated['password']),
+    ]);
 
-        event(new Registered($user));
+    // Przypisanie domyślnej roli użytkownika
+    $user->assignRole('user');
 
-        Auth::login($user);
-
-        return response()->noContent();
-    }
+    // Zwrócenie odpowiedzi JSON
+    return response()->json([
+        'message' => 'Użytkownik zarejestrowany pomyślnie.',
+        'user' => $user,
+    ], 201);
+}
 }

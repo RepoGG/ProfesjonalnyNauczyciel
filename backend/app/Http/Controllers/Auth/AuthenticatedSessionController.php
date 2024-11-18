@@ -24,9 +24,14 @@ class AuthenticatedSessionController extends Controller
 
         // Zwrócenie odpowiedzi JSON
         return response()->json([
-            'message' => 'Zalogowano pomyślnie',
-            'user' => $request->user(),
-        ]);
+        'message' => 'Zalogowano pomyślnie',
+        'user' => [
+            'id' => $request->user()->id,
+            'name' => $request->user()->name,
+            'email' => $request->user()->email,
+            'role' => $request->user()->getRoleNames()->first(), // Użycie Spatie Permissions
+        ],
+    ]);
     }
 
     /**
