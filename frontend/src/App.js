@@ -1,14 +1,28 @@
-import React, { useEffect } from "react";
-import api from "./services/api";
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./components/Home";
+import Login from "./components/Login";
+import Register from "./components/Register";
+import PrivateRoute from "./components/PrivateRoute";
 
-const App = () => {
-  useEffect(() => {
-    api.get("/test").then((response) => {
-      console.log(response.data);
-    });
-  }, []);
-
-  return <div>Sprawdź konsolę</div>;
-};
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route
+          path="/dashboard"
+          element={
+            <PrivateRoute>
+              <Home />
+            </PrivateRoute>
+          }
+        />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="*" element={<h1>404: Strona nie została znaleziona</h1>} />
+      </Routes>
+    </Router>
+  );
+}
 
 export default App;
