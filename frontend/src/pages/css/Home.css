@@ -1,0 +1,161 @@
+/* Kontener ogólny */
+.dashboard-container {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  height: 100vh;
+  font-family: "Arial", sans-serif;
+}
+
+/* Górne menu */
+.dashboard-header {
+  background: linear-gradient(to right, #007bff, #6610f2);
+  color: white;
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+
+.dashboard-header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  max-width: 1200px;
+}
+
+.site-name {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* Zawartość główna */
+.dashboard-content {
+  display: grid;
+  grid-template-columns: 250px 1fr 250px;
+  gap: 10px;
+  padding: 100px 20px 20px; /* Ustępuje miejsca dla górnego menu */
+}
+
+.dashboard-sidebar,
+.dashboard-right {
+  background-color: #f4f4f4;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+.dashboard-main {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+/* Panel */
+.dashboard-panel {
+  display: grid;
+  gap: 20px;
+}
+
+.dashboard-card {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.dashboard-card:hover {
+  transform: scale(1.05);
+}
+
+.dashboard-card h4 {
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+/* Stopka */
+.dashboard-footer {
+  background: linear-gradient(to right, #6610f2, #007bff);
+  color: white;
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
+  border-radius: 10px;
+}
+
+.dashboard-footer-inner {
+  text-align: center;
+  width: 90%;
+  max-width: 1200px;
+}
+
+/* Sidebar po lewej */
+.dashboard-sidebar {
+  background: linear-gradient(to bottom, #007bff, #6610f2);
+  color: white;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-sidebar h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #ffdd57;
+}
+
+.dashboard-sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.dashboard-sidebar ul li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.dashboard-sidebar ul li:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.dashboard-sidebar ul li svg {
+  color: #ffdd57;
+}
+
+/* Prawy sidebar */
+.dashboard-right {
+  background: linear-gradient(to bottom, #ff5722, #ff9800);
+  color: white;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-right h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.dashboard-right p {
+  font-size: 14px;
+  line-height: 1.5;
+}
