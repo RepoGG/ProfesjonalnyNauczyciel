@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Spatie\Permission\Models\Role; 
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Log;
 
 class RegisteredUserController extends Controller
 {
@@ -35,6 +36,10 @@ class RegisteredUserController extends Controller
         'email' => $validated['email'],
         'password' => bcrypt($validated['password']),
     ]);
+    
+Log::info('Dane wejściowe: ', $request->all());
+Log::info('Zarejestrowano użytkownika: ', ['user' => $user]);
+
 
     // Przypisanie domyślnej roli użytkownika
     $user->assignRole('user');

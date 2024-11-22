@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaUser, FaEnvelope, FaLock } from "react-icons/fa";
-import api from "../../api";
+import api from "../../api"; // Zakładam, że masz konfigurację Axios w `api.js`
 import "./css/Register.css";
 
 const Register = () => {
@@ -12,18 +12,44 @@ const Register = () => {
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [error, setError] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
 
-    // Symulacja rejestracji (do zaimplementowania z backendem)
+    // Walidacja frontendowa
     if (password !== passwordConfirmation) {
       setError("Hasła nie są zgodne!");
       return;
     }
 
-    alert("Rejestracja zakończona sukcesem!");
-    navigate("/login");
+    try {
+      // Pobierz CSRF cookie
+      await api.get("/sanctum/csrf-cookie");
+
+      // Wysyłanie danych do backendu
+      const response = await api.post("/api/register", {
+        name,
+        email,
+        password,
+        password_confirmation: passwordConfirmation, // Laravel oczekuje `password_confirmation`
+      });
+
+      // Sprawdzenie odpowiedzi
+      if (response.status === 201) {
+        alert("Rejestracja zakończona sukcesem!");
+        navigate("/login"); // Przekierowanie do logowania
+      }
+    } catch (err) {
+      // Obsługa błędów
+      if (err.response) {
+        // Błędy walidacji z backendu
+        setError(
+          err.response.data.message || "Wystąpił błąd podczas rejestracji."
+        );
+      } else {
+        setError("Wystąpił problem z połączeniem z serwerem.");
+      }
+    }
   };
 
   return (

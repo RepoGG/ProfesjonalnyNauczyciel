@@ -3,6 +3,7 @@ import { FaBook, FaUsers, FaCog } from "react-icons/fa";
 import LogoutButton from "../components/auth/Logout";
 import { Dropdown, DropdownButton } from "react-bootstrap";
 import "./css/Home.css";
+import ManageUsers from "../components/auth/ManageUsers";
 
 const Dashboard = () => {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -78,6 +79,7 @@ const AdminDashboard = () => (
   <div className="dashboard-panel">
     <h2>Panel Administratora</h2>
     <p>Możesz zarządzać użytkownikami i kursami tutaj.</p>
+    <ManageUsers />
   </div>
 );
 

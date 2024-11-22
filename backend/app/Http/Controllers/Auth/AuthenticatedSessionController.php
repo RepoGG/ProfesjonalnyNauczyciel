@@ -20,7 +20,7 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         // Regeneracja sesji
-        // $request->session()->regenerate();
+        $request->session()->regenerate();
 
         // Zwrócenie odpowiedzi JSON
         return response()->json([
