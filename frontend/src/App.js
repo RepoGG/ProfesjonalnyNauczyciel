@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import PrivateRoute from "./components/PrivateRoute";
+import ManageUsers from "./components/auth/ManageUsers";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             </PrivateRoute>
           }
         />
+
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="*" element={<h1>404: Strona nie została znaleziona</h1>} />
