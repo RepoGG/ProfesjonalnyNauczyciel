@@ -13,6 +13,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        Role::firstOrCreate(['name' => 'user']);
+       $this->call(RolesAndPermissionsSeeder::class);
+
     }
 }
