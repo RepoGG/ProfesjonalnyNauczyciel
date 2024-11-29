@@ -4,6 +4,9 @@ import LogoutButton from "../components/auth/Logout";
 import { Dropdown, DropdownButton } from "react-bootstrap";
 import "./css/Home.css";
 import ManageUsers from "../components/auth/ManageUsers";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+
+import { Outlet } from "react-router-dom";
 
 const Dashboard = () => {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -39,24 +42,25 @@ const Dashboard = () => {
           <h3>Menu</h3>
           <ul>
             <li>
-              <FaBook /> Kursy
+              <FaBook /> <Link to="/dashboard/courses">Kursy</Link>
             </li>
             <li>
-              <FaCog /> Profil
+              <FaCog /> <Link to="/dashboard/profile">Profil</Link>
             </li>
             {user.role === "admin" && (
               <li>
-                <FaUsers /> Zarządzaj Użytkownikami
+                <FaUsers />{" "}
+                <Link to="/dashboard/manage-users">
+                  Zarządzaj Użytkownikami
+                </Link>
               </li>
             )}
           </ul>
         </aside>
 
+        {/* Dynamiczna środkowa sekcja */}
         <section className="dashboard-main">
-          <h2>
-            Witaj, {user.role === "admin" ? "Administratorze" : "Użytkowniku"}!
-          </h2>
-          {user.role === "admin" ? <AdminDashboard /> : <UserDashboard />}
+          <Outlet /> {/* To miejsce na dynamicznie ładowane komponenty */}
         </section>
 
         <aside className="dashboard-right">
@@ -74,20 +78,5 @@ const Dashboard = () => {
     </div>
   );
 };
-
-const AdminDashboard = () => (
-  <div className="dashboard-panel">
-    <h2>Panel Administratora</h2>
-    <p>Możesz zarządzać użytkownikami i kursami tutaj.</p>
-    <ManageUsers />
-  </div>
-);
-
-const UserDashboard = () => (
-  <div className="dashboard-panel">
-    <h2>Twoje Kursy</h2>
-    <p>Możesz przeglądać swoje dostępne kursy tutaj.</p>
-  </div>
-);
 
 export default Dashboard;

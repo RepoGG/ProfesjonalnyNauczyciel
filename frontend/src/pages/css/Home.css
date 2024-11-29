@@ -101,6 +101,16 @@
 }
 
 /* Sidebar po lewej */
+
+.dashboard-sidebar a {
+  color: white;
+  text-decoration: none; /* opcjonalnie */
+}
+
+.dashboard-sidebar a:hover {
+  color: #ccc; /* opcjonalnie */
+}
+
 .dashboard-sidebar {
   background: linear-gradient(to bottom, #007bff, #6610f2);
   color: white;
