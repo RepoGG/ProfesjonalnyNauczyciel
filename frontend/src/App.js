@@ -6,6 +6,7 @@ import Register from "./components/auth/Register";
 import PrivateRoute from "./components/PrivateRoute";
 import Dashboard from "./pages/Home";
 import ManageUsers from "./components/auth/ManageUsers";
+import Courses from "./components/Courses";
 
 function App() {
   return (
@@ -21,7 +22,7 @@ function App() {
           }
         >
           <Route path="manage-users" element={<ManageUsers />} />
-          <Route path="courses" element={<h2>Tu będą kursy</h2>} />
+          <Route path="courses" element={<Courses />} />
           <Route path="profile" element={<h2>Tu będzie profil</h2>} />
         </Route>
 
