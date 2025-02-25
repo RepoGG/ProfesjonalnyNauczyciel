@@ -7,6 +7,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import Dashboard from "./pages/Home";
 import ManageUsers from "./components/auth/ManageUsers";
 import Courses from "./components/Courses";
+import Fields from "./components/Fields";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           }
         >
           <Route path="manage-users" element={<ManageUsers />} />
+          <Route path="fields" element={<Fields />} />
           <Route path="courses" element={<Courses />} />
           <Route path="profile" element={<h2>Tu będzie profil</h2>} />
         </Route>
